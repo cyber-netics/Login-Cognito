@@ -1,8 +1,8 @@
 import React from "react";
 import { Button, Form, Input, Divider, Alert } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
-import CustomIcon from "../../components/Icon";
-import { GoogleSVG, FacebookSVG } from '../../assets/svg/icon';
+import CustomIcon from "./Icon";
+import { GoogleSVG, FacebookSVG } from "../assets/svg/icon";
 
 import { motion } from "framer-motion";
 const initialCredential = {
