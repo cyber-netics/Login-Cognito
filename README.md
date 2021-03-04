@@ -19,13 +19,6 @@
 <br/>
 <br/>
 
-## Start the app
-
-- ` npm install npm run start`
-
-<br/>
-<br/>
-
 ## AWS Cognito Setup
 
     - AWS Cognito User managment with signup, login, and forgot password options
