@@ -89,7 +89,7 @@ const LoginForm = (props) => {
                 onClick={() => onForgetPasswordClick}
                 className="cursor-pointer font-size-sm font-weight-normal text-muted"
               >
-                Forget Password?
+                <a href='/forgot-password'>Forget Password?</a>
               </span>
             </div>
           }
