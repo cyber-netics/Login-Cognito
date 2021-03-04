@@ -1,6 +1,8 @@
-import React from "react";
-import LoginForm from "./LoginForm";
+import React, { useState, useContext } from "react";
 import { Row, Col } from "antd";
+
+import { AuthContext } from "../../../components/AuthProvider";
+import LoginForm from "./LoginForm";
 
 const backgroundURL = "/img/others/img-17.jpg";
 const backgroundStyle = {
@@ -10,6 +12,18 @@ const backgroundStyle = {
 };
 
 const LoginTwo = (props) => {
+  const { authenticate } = useContext(AuthContext);
+
+  const onLogin = ({ email, password }) => {
+    authenticate(email, password)
+      .then((data) => {
+        props.history.push("/dashboard");
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
+  };
+
   return (
     <div className={`h-100`}>
       <Row justify="center" className="align-items-stretch h-100">
@@ -19,11 +33,10 @@ const LoginTwo = (props) => {
               <Col xs={24} sm={24} md={20} lg={12} xl={8}>
                 <h1>Sign In</h1>
                 <p>
-                  Don't have an account yet?{" "}
-                  <a href="/auth/register-2">Sign Up</a>
+                  Don't have an account yet? <a href="/signup">Sign Up</a>
                 </p>
                 <div className="mt-4">
-                  <LoginForm {...props} />{" "}
+                  <LoginForm onLogin={onLogin} />{" "}
                 </div>
               </Col>
             </Row>

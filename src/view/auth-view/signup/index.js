@@ -19,7 +19,7 @@ const RegisterTwo = (props) => {
               <Col xs={24} sm={24} md={20} lg={12} xl={8}>
                 <h1>Sign Up</h1>
                 <p>
-                  Already have an account? <a href="/auth/login-2">Sign In</a>
+                  Already have an account? <a href="/">Sign In</a>
                 </p>
                 <div className="mt-4">
                   <RegisterForm {...props} />

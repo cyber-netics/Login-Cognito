@@ -6,39 +6,12 @@ import { motion } from "framer-motion";
 import CustomIcon from "../../../components/Icon";
 import { GoogleSVG, FacebookSVG } from "../../../assets/svg/icon";
 
-import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
-import UserPool from "../../../userPool";
-
 const initialCredential = {
-  email: "user1@themenate.net",
-  password: "2005ipo",
+  email: "edote92@gmail.com",
+  password: "Password1!",
 };
 
-const LoginForm = () => {
-  const onLogin = ({ email, password }) => {
-    const user = new CognitoUser({
-      Username: email,
-      Pool: UserPool,
-    });
-
-    const authDetails = new AuthenticationDetails({
-      Username: email,
-      Password: password,
-    });
-
-    user.authenticateUser(authDetails, {
-      onSuccess: (data) => {
-        console.log("onSuccess:", data);
-      },
-      onFailure: (err) => {
-        console.log("onFailure:", err);
-      },
-      newPasswordRequired: (data) => {
-        console.log("newPassword", data);
-      },
-    });
-  };
-
+const LoginForm = (props) => {
   const onForgetPasswordClick = () => {};
   const onGoogleLogin = () => {};
   const onFacebookLogin = () => {};
@@ -85,7 +58,7 @@ const LoginForm = () => {
         layout="vertical"
         name="login-form"
         initialValues={initialCredential}
-        onFinish={onLogin}
+        onFinish={props.onLogin}
       >
         <Form.Item
           name="email"
