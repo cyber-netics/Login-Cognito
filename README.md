@@ -2,7 +2,31 @@
 
 ---
 
-### AWS Cognito Setup
+## Cognito configs
+
+    - In `Login-Cognito/src/userPool.js` file change your `UserPoolId` and `ClientId`
+
+- UserPoolId can be found in
+  <p>
+    <img src="https://github.com/cyber-netics/Login-Cognito/blob/main/.assets/images/poolid.png"/>
+  </p>
+
+- ClientId can be found in
+  <p>
+    <img src="https://github.com/cyber-netics/Login-Cognito/blob/main/.assets/images/app-client-settings-clientid.png"/>
+  </p>
+
+<br/>
+<br/>
+
+## Start the app
+
+- ` npm install npm run start`
+
+<br/>
+<br/>
+
+## AWS Cognito Setup
 
     - AWS Cognito User managment with signup, login, and forgot password options
 
