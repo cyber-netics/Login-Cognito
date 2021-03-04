@@ -1,17 +1,44 @@
 import React from "react";
 import { Button, Form, Input, Divider, Alert } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
-import CustomIcon from "./Icon";
-import { GoogleSVG, FacebookSVG } from "../assets/svg/icon";
-
 import { motion } from "framer-motion";
+
+import CustomIcon from "../../../components/Icon";
+import { GoogleSVG, FacebookSVG } from "../../../assets/svg/icon";
+
+import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
+import UserPool from "../../../userPool";
+
 const initialCredential = {
   email: "user1@themenate.net",
   password: "2005ipo",
 };
 
 const LoginForm = () => {
-  const onLogin = () => {};
+  const onLogin = ({ email, password }) => {
+    const user = new CognitoUser({
+      Username: email,
+      Pool: UserPool,
+    });
+
+    const authDetails = new AuthenticationDetails({
+      Username: email,
+      Password: password,
+    });
+
+    user.authenticateUser(authDetails, {
+      onSuccess: (data) => {
+        console.log("onSuccess:", data);
+      },
+      onFailure: (err) => {
+        console.log("onFailure:", err);
+      },
+      newPasswordRequired: (data) => {
+        console.log("newPassword", data);
+      },
+    });
+  };
+
   const onForgetPasswordClick = () => {};
   const onGoogleLogin = () => {};
   const onFacebookLogin = () => {};

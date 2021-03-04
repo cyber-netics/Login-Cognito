@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Alert } from "antd";
+import UserPool from "../../../userPool";
 
 import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -39,22 +40,17 @@ const rules = {
 };
 
 export const RegisterForm = (props) => {
-  const {
-    signUp,
-    showLoading,
-    token,
-    loading,
-    redirect,
-    message,
-    showMessage,
-    hideAuthMessage,
-    allowRedirect,
-  } = props;
+  const { loading } = props;
   const [form] = Form.useForm();
 
   let history = useHistory();
 
-  const onSignUp = () => {};
+  const onSignUp = ({ email, password }) => {
+    UserPool.signUp(email, password, [], null, (err, data) => {
+      if (err) console.log("err--", err);
+      console.log("data--->", data);
+    });
+  };
 
   return (
     <>
