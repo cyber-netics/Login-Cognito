@@ -2,6 +2,9 @@ import React from "react";
 import RegisterForm from "./RegisterForm";
 import { Row, Col } from "antd";
 
+import UserPool from "../../../userPool";
+import { useHistory } from "react-router-dom";
+
 const backgroundURL = "/img/others/img-17.jpg";
 const backgroundStyle = {
   backgroundImage: `url(${backgroundURL})`,
@@ -10,6 +13,15 @@ const backgroundStyle = {
 };
 
 const RegisterTwo = (props) => {
+  let history = useHistory();
+
+  const onSignUp = ({ email, password }) => {
+    UserPool.signUp(email, password, [], null, (err, _) => {
+      if (err) return;
+      history.push("/");
+    });
+  };
+
   return (
     <div className={`h-100`}>
       <Row justify="center" className="align-items-stretch h-100">
@@ -22,7 +34,7 @@ const RegisterTwo = (props) => {
                   Already have an account? <a href="/">Sign In</a>
                 </p>
                 <div className="mt-4">
-                  <RegisterForm {...props} />
+                  <RegisterForm {...props} handleSubmit={onSignUp} />
                 </div>
               </Col>
             </Row>

@@ -1,9 +1,7 @@
 import React from "react";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Alert } from "antd";
-import UserPool from "../../../userPool";
 
-import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const rules = {
@@ -43,15 +41,6 @@ export const RegisterForm = (props) => {
   const { loading } = props;
   const [form] = Form.useForm();
 
-  let history = useHistory();
-
-  const onSignUp = ({ email, password }) => {
-    UserPool.signUp(email, password, [], null, (err, data) => {
-      if (err) console.log("err--", err);
-      console.log("data--->", data);
-    });
-  };
-
   return (
     <>
       <motion.div
@@ -67,7 +56,7 @@ export const RegisterForm = (props) => {
         form={form}
         layout="vertical"
         name="register-form"
-        onFinish={onSignUp}
+        onFinish={props.handleSubmit}
       >
         <Form.Item name="email" label="Email" rules={rules.email} hasFeedback>
           <Input prefix={<MailOutlined className="text-primary" />} />
