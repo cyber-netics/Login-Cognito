@@ -73,6 +73,17 @@
    <img src="https://github.com/cyber-netics/Login-Cognito/blob/main/.assets/images/remember-user-settins.png"/>
  </p>
 
+- User Access Settings
+<p>
+   <img src="https://github.com/cyber-netics/Login-Cognito/blob/main/.assets/images/user-access-settings.png"/>
+ </p>
+
+- User pool access settings, give name, uncheck `Generate client secret` 
+<p>
+    <img src="https://github.com/cyber-netics/Login-Cognito/blob/main/.assets/images/user-pool-access-settings.png"/>
+ </p>
+
+
 - We can setup custom lambda triggers
 <p>
     <img src="https://github.com/cyber-netics/Login-Cognito/blob/main/.assets/images/custom-triggers-settings.png"/>
