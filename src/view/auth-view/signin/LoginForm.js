@@ -8,7 +8,7 @@ import { GoogleSVG, FacebookSVG } from "../../../assets/svg/icon";
 
 const initialCredential = {
   email: "edote92@gmail.com",
-  password: "Password1!",
+  password: "Edo883562616!",
 };
 
 const LoginForm = (props) => {
@@ -103,7 +103,7 @@ const LoginForm = (props) => {
           <Input.Password prefix={<LockOutlined className="text-primary" />} />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" block loading={false}>
+          <Button type="primary" htmlType="submit" block loading={props.loading}>
             Sign In
           </Button>
         </Form.Item>

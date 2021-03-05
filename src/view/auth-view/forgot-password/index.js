@@ -11,9 +11,10 @@ const backgroundStyle = {
   backgroundSize: "cover",
 };
 
-const ForgotPassword = () => {
+const ForgotPassword = (props) => {
   const [loading, setLoading] = useState(false);
   const [stage, setStage] = useState(1); // 1 -> email, 2 -> verific. code, 3 -> new pass
+  const [email, setEmail] = useState();
 
   const getUser = (email) => {
     return new CognitoUser({
@@ -23,6 +24,7 @@ const ForgotPassword = () => {
   };
 
   const handleResetPassword = ({ email }) => {
+    setEmail(email);
     setLoading(true);
 
     getUser(email).forgotPassword({
@@ -49,9 +51,13 @@ const ForgotPassword = () => {
       return;
     }
 
-    getUser().confirmPassword(code, password, {
-      onSuccess: (data) => {
+    getUser(email).confirmPassword(code, password, {
+      onSuccess: () => {
         setLoading(false);
+        message.success("password successfully has been changed");
+        setTimeout(() => {
+          props.history.push("/login");
+        }, 1500);
       },
       onFailure: (err) => {
         setLoading(false);
