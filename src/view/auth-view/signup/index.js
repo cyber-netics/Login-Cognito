@@ -5,7 +5,7 @@ import { Row, Col } from "antd";
 import UserPool from "../../../userPool";
 import { useHistory } from "react-router-dom";
 
-const backgroundURL = "/img/others/img-17.jpg";
+const backgroundURL = "/img/forgotpass-bg-image.jpg";
 const backgroundStyle = {
   backgroundImage: `url(${backgroundURL})`,
   backgroundRepeat: "no-repeat",
@@ -45,14 +45,11 @@ const RegisterTwo = (props) => {
             className="d-flex flex-column justify-content-between h-100 px-4"
             style={backgroundStyle}
           >
-            <div className="text-right">
-              <img src="/img/logo-white.png" alt="logo" />
-            </div>
             <Row justify="center">
               <Col xs={0} sm={0} md={0} lg={20}>
                 <img
                   className="img-fluid mb-5"
-                  src="/img/others/img-19.png"
+                  src="/img/side-image.png"
                   alt=""
                 />
                 <h1 className="text-white">Welcome to emilus</h1>

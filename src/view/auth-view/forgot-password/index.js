@@ -6,7 +6,7 @@ import { CognitoUser } from "amazon-cognito-identity-js";
 import UsersPool from "../../../userPool";
 
 const backgroundStyle = {
-  backgroundImage: "url(/img/others/img-17.jpg)",
+  backgroundImage: "url(/img/forgotpass-bg-image.jpg)",
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
 };
