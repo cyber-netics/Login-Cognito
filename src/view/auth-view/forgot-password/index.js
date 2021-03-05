@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { Card, Row, Col, Form, Input, Button, message } from "antd";
-import { MailOutlined } from "@ant-design/icons";
+import { Card, Row, Col, message } from "antd";
+import ForgotPassForm from "./fogotPassForm";
+
+import { CognitoUser } from "amazon-cognito-identity-js";
+import UsersPool from "../../../userPool";
 
 const backgroundStyle = {
   backgroundImage: "url(/img/others/img-17.jpg)",
@@ -9,15 +12,51 @@ const backgroundStyle = {
 };
 
 const ForgotPassword = () => {
-  const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [stage, setStage] = useState(1); // 1 -> email, 2 -> verific. code, 3 -> new pass
 
-  const onSend = (values) => {
+  const getUser = (email) => {
+    return new CognitoUser({
+      Username: email,
+      Pool: UsersPool,
+    });
+  };
+
+  const handleResetPassword = ({ email }) => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      message.success("New password has send to your email!");
-    }, 1500);
+
+    getUser(email).forgotPassword({
+      onSuccess: (data) => {
+        setLoading(false);
+      },
+      onFailure: (err) => {
+        setLoading(false);
+      },
+      inputVerificationCode: (data) => {
+        message.success("verification code has send to your email!");
+        setStage(2);
+      },
+    });
+  };
+
+  const handleChangePassword = ({ code, password, confirmPassword }) => {
+    if (
+      !code.length ||
+      !password.length ||
+      !confirmPassword.length ||
+      password !== confirmPassword
+    ) {
+      return;
+    }
+
+    getUser().confirmPassword(code, password, {
+      onSuccess: (data) => {
+        setLoading(false);
+      },
+      onFailure: (err) => {
+        setLoading(false);
+      },
+    });
   };
 
   return (
@@ -36,41 +75,12 @@ const ForgotPassword = () => {
                 </div>
                 <Row justify="center">
                   <Col xs={24} sm={24} md={20} lg={20}>
-                    <Form
-                      form={form}
-                      layout="vertical"
-                      name="forget-password"
-                      onFinish={onSend}
-                    >
-                      <Form.Item
-                        name="email"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please input your email address",
-                          },
-                          {
-                            type: "email",
-                            message: "Please enter a validate email!",
-                          },
-                        ]}
-                      >
-                        <Input
-                          placeholder="Email Address"
-                          prefix={<MailOutlined className="text-primary" />}
-                        />
-                      </Form.Item>
-                      <Form.Item>
-                        <Button
-                          loading={loading}
-                          type="primary"
-                          htmlType="submit"
-                          block
-                        >
-                          {loading ? "Sending" : "Send"}
-                        </Button>
-                      </Form.Item>
-                    </Form>
+                    <ForgotPassForm
+                      handleResetPassword={handleResetPassword}
+                      handleChangePassword={handleChangePassword}
+                      stage={stage}
+                      loading={loading}
+                    />
                   </Col>
                 </Row>
               </div>
