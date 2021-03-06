@@ -38,7 +38,6 @@ const rules = {
 };
 
 export const RegisterForm = (props) => {
-  const { loading } = props;
   const [form] = Form.useForm();
 
   return (
@@ -78,7 +77,12 @@ export const RegisterForm = (props) => {
           <Input.Password prefix={<LockOutlined className="text-primary" />} />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" block loading={loading}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            block
+            loading={props.loading}
+          >
             Sign Up
           </Button>
         </Form.Item>

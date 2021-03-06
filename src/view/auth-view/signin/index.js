@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Row, Col } from "antd";
+import { Row, Col, message } from "antd";
 
 import { AuthContext } from "../../../components/AuthProvider";
 import LoginForm from "./LoginForm";
@@ -21,7 +21,8 @@ const LoginTwo = (props) => {
       .then(() => {
         props.history.push("/dashboard");
       })
-      .catch(() => {
+      .catch((err) => {
+        message.error(err.message);
         setLoading(false);
       });
   };

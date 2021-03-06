@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import RegisterForm from "./RegisterForm";
-import { Row, Col } from "antd";
+import { Row, Col, message } from "antd";
 
 import UserPool from "../../../userPool";
 import { useHistory } from "react-router-dom";
@@ -13,11 +13,17 @@ const backgroundStyle = {
 };
 
 const RegisterTwo = (props) => {
+  const [loading, setLoading] = useState();
   let history = useHistory();
 
   const onSignUp = ({ email, password }) => {
+    setLoading(true);
     UserPool.signUp(email, password, [], null, (err, _) => {
-      if (err) return;
+      if (err) {
+        message.error(err.message.split(":")[1]);
+        setLoading(false);
+        return;
+      }
       history.push("/");
     });
   };
@@ -34,7 +40,7 @@ const RegisterTwo = (props) => {
                   Already have an account? <a href="/">Sign In</a>
                 </p>
                 <div className="mt-4">
-                  <RegisterForm {...props} handleSubmit={onSignUp} />
+                  <RegisterForm loading={loading} handleSubmit={onSignUp} />
                 </div>
               </Col>
             </Row>
